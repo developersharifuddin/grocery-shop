@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Admin | supplier')
+@section('title', 'Admin | money-lending')
 
 @section('page-headder')
-{{-- suppliers --}}
+{{-- money-lendings --}}
 @endsection
 
 
@@ -11,14 +11,14 @@
     <div class="col-sm-6">
         <span class="my-auto h6 page-headder">@yield('page-headder')</span>
         <ol class="breadcrumb bg-white">
-            <li class="breadcrumb-supplier"> <a href="{{ route('admin.dashboard') }}" class="text-primary"><i class="fa fa-home"></i> </a></li>
-            <li class="breadcrumb-supplier text-dark px-2"><a href="{{ route('admin.suppliers.index') }}"> suppliers</a>
+            <li class="breadcrumb-money-lending"> <a href="{{ route('admin.dashboard') }}" class="text-primary"><i class="fa fa-home"></i> </a></li>
+            <li class="breadcrumb-money-lending text-dark px-2"><a href="{{ route('admin.money-lending.index') }}"> money-lendings</a>
             </li>
         </ol>
     </div>
     <div class="col-md-6">
         <ol class="float-right button">
-            <a href="{{ route('admin.suppliers.create') }}" class="btn btn-success" rel="tooltip" id="add" title="add">
+            <a href="{{ route('admin.money-lending.create') }}" class="btn btn-success" rel="tooltip" id="add" title="add">
                 Add New
             </a>
         </ol>
@@ -37,11 +37,11 @@
     <div class="col-12 p-0">
         <div class="card">
             <div class="card-header justify-content-between py-3">
-                <h4 class="card-title float-left pt-2">All supplier</h4>
+                <h4 class="card-title float-left pt-2">All money-lending</h4>
 
                 <div class="float-right d-flex my-auto gap-3">
 
-                    <form class="mb-0 pb-0" id="sort_suppliers" action="" method="GET">
+                    <form class="mb-0 pb-0" id="sort_money-lendings" action="" method="GET">
                         <div class="input-group py-0 my-0">
                             <input type="text" name="search" class="form-control" id="inputGroupFile02" placeholder="Search">
                             <button type="submit" class="btn btn-success input-group-text" for="inputGroupFile02"> <i class="fas fa-search"></i></button>
@@ -55,43 +55,57 @@
                     <thead>
                         <tr>
                             <th>SL</th>
-                            {{-- <th class="image text-start">Image</th> --}}
                             <th style="text-align: left !important; ">Name</th>
                             <th>Email</th>
                             <th>Phone Number</th>
-                            {{-- <th>Country</th>
-                                <th>State</th> --}}
-                            {{-- <th>City</th> --}}
+                            <th>NID</th>
+                            <th>Country</th>
+                            <th>Division</th>
+                            <th>District</th>
+                            <th>City</th>
+                            <th>Area</th>
                             <th>Postcode</th>
-                            <th>Address</th>
+                            <th>Parent Address</th>
+                            <th>Permanent Address</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>To Amount</th>
+                            <th>Received Amount</th>
+                            <th>Due Amount</th>
+                            <th>Monthly Profit</th>
+                            <th>Is Closed</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="datatable">
-                        @if (count($suppliers) > 0)
-                        @foreach ($suppliers as $key => $supplier)
+                        @if (count($moneyLendings) > 0)
+                        @foreach ($moneyLendings as $key => $money_lending)
                         <tr>
-                            <td>{{ $supplier->id }}</td>
-                            {{-- <td>
-                                            <img src="{{ asset('uploads/suppliers/' . $supplier->thumbnail) }}"
-                            alt="{{ $supplier->thumbnail }}" width="80">
-                            </td> --}}
-                            <td class="supplier-name text-start" style="line-height:1.5; min-width:150px">
-                                <p>{{ $supplier->name }}</p>
+                            <td>{{ $money_lending->id }}</td>
+
+                            <td class="money-lending-name text-start" style="line-height:1.5; min-width:150px">
+                                <p>{{ $money_lending->name }}</p>
                             </td>
-                            <td>{{ $supplier->email }}</td>
-                            <td>{{ $supplier->phone }}</td>
-                            {{-- <td>{{ $supplier->country }}</td>
-                            <td>{{ $supplier->state }}</td> --}}
-                            {{-- <td>{{ $supplier->city }}</td> --}}
-                            <td>{{ $supplier->postcode }}</td>
-                            <td style="width:20%">{{ $supplier->address }}</td>
-                            {{-- <td>{{ $supplier->previous_due }}</td> --}}
-
-
-                            <td style="min-width:130px" class="d-flex my-4 text-center">
-
-                                <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST" style="display: inline;">
+                            <td>{{ $money_lending->email }}</td>
+                            <td>{{ $money_lending->phone }}</td>
+                            <td>{{ $money_lending->nid }}</td>
+                            <td>{{ $money_lending->country }}</td>
+                            <td>{{ $money_lending->division }}</td>
+                            <td>{{ $money_lending->district }}</td>
+                            <td>{{ $money_lending->city }}</td>
+                            <td>{{ $money_lending->Area }}</td>
+                            <td>{{ $money_lending->postcode }}</td>
+                            <td>{{ $money_lending->parent_address }}</td>
+                            <td>{{ $money_lending->permanent_address }}</td>
+                            <td>{{ $money_lending->from_date }}</td>
+                            <td>{{ $money_lending->to_date }}</td>
+                            <td>{{ $money_lending->to_amount }}</td>
+                            <td>{{ $money_lending->recv_amount }}</td>
+                            <td>{{ $money_lending->due_amount }}</td>
+                            <td>{{ $money_lending->monthly_profit }}</td>
+                            <td>{{ $money_lending->is_closed ? 'Closed' : 'Open' }}</td>
+                            <td style="min-width:130px" class="d-flex my-4">
+                                <form action="{{ route('admin.money-lending.destroy', $money_lending->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger delete" onclick="return confirm('Are you sure?')"> <i class="fas fa-trash-can"></i></button>
@@ -101,14 +115,14 @@
                         @endforeach
                         @else
                         <tr class="h-50">
-                            <td colspan="13">
+                            <td colspan="22">
                                 <h4 class="fs-4">No data found</h4>
                             </td>
                         </tr>
                         @endif
-
                     </tbody>
                 </table>
+
 
                 <div class="pt-4 pb-2 px-4">
                     <div class="pagination d-flex justify-content-between">
@@ -165,17 +179,17 @@
                             <!-- Information about displayed entries -->
                             <div class="dataTables_info pl-2">
                                 Showing
-                                <span id="showing-entries-from">{{ $suppliers->firstItem() }}</span>
+                                <span id="showing-entries-from">{{ $moneyLendings->firstItem() }}</span>
                                 to
-                                <span id="showing-entries-to">{{ $suppliers->lastItem() }}</span>
+                                <span id="showing-entries-to">{{ $moneyLendings->lastItem() }}</span>
                                 of
-                                <span id="total-entries">{{ $suppliers->total() }}</span>
+                                <span id="total-entries">{{ $moneyLendings->total() }}</span>
                                 entries
                             </div>
                         </div>
                         <!-- ... (remaining content) -->
-                        {{ $suppliers->links('components.pagination.default') }}
-                        {{-- {{ $suppliers->appends(request()->except('page'))->links() }} --}}
+                        {{ $moneyLendings->links('components.pagination.default') }}
+                        {{-- {{ $money-lendings->appends(request()->except('page'))->links() }} --}}
                     </div>
                 </div>
             </div>

@@ -30,7 +30,9 @@ use App\Http\Controllers\NewOrderPlacedController;
 use App\Http\Controllers\Admin\HK\UomSetController;
 use App\Http\Controllers\Admin\HK\CategoryController;
 use App\Http\Controllers\Admin\PointOfSaleController;
+use App\Http\Controllers\Admin\MoneyLendingController;
 use App\Http\Controllers\Admin\DailyExpensesController;
+use App\Http\Controllers\Admin\PurchaseOrdersController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -204,6 +206,7 @@ Route::middleware([
 
     Route::resource('/customers', CustomerController::class);
     Route::resource('/suppliers', SupplierController::class);
+    Route::resource('/money-lending', MoneyLendingController::class);
 
     Route::resource('/brands', BrandController::class);
     Route::resource('/uoms', UomController::class);
@@ -230,6 +233,7 @@ Route::middleware([
 
 
     Route::resource('/daily-expenses', DailyExpensesController::class);
+    Route::resource('/purchase-orders', PurchaseOrdersController::class);
 
 
 

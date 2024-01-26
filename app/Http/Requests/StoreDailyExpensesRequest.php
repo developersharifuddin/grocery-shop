@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DailyExpensesRequest extends FormRequest
+class StoreDailyExpensesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,7 @@ class DailyExpensesRequest extends FormRequest
             'expense_date' => 'required|date',
             'approved_status' => 'required|string',
             'deleted_at' => 'nullable',
+            'amount' => 'required',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PurchaseOrders;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -17,5 +18,10 @@ class Supplier extends Model
     public function sales()
     {
         return $this->hasMany(Sell::class);
+    }
+
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrders::class, 'supplier_id');
     }
 }

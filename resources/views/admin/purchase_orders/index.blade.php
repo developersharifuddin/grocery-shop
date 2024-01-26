@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('title', 'Admin | supplier')
+@section('title', 'Admin | purchaseOrder')
 
 @section('page-headder')
-{{-- suppliers --}}
+{{-- purchaseOrders --}}
 @endsection
 
 
@@ -11,14 +11,14 @@
     <div class="col-sm-6">
         <span class="my-auto h6 page-headder">@yield('page-headder')</span>
         <ol class="breadcrumb bg-white">
-            <li class="breadcrumb-supplier"> <a href="{{ route('admin.dashboard') }}" class="text-primary"><i class="fa fa-home"></i> </a></li>
-            <li class="breadcrumb-supplier text-dark px-2"><a href="{{ route('admin.suppliers.index') }}"> suppliers</a>
+            <li class="breadcrumb-purchaseOrder"> <a href="{{ route('admin.dashboard') }}" class="text-primary"><i class="fa fa-home"></i> </a></li>
+            <li class="breadcrumb-purchaseOrder text-dark px-2"><a href="{{ route('admin.purchase-orders.index') }}"> purchaseOrders</a>
             </li>
         </ol>
     </div>
     <div class="col-md-6">
         <ol class="float-right button">
-            <a href="{{ route('admin.suppliers.create') }}" class="btn btn-success" rel="tooltip" id="add" title="add">
+            <a href="{{ route('admin.purchase-orders.create') }}" class="btn btn-success" rel="tooltip" id="add" title="add">
                 Add New
             </a>
         </ol>
@@ -37,11 +37,11 @@
     <div class="col-12 p-0">
         <div class="card">
             <div class="card-header justify-content-between py-3">
-                <h4 class="card-title float-left pt-2">All supplier</h4>
+                <h4 class="card-title float-left pt-2">All purchaseOrder</h4>
 
                 <div class="float-right d-flex my-auto gap-3">
 
-                    <form class="mb-0 pb-0" id="sort_suppliers" action="" method="GET">
+                    <form class="mb-0 pb-0" id="sort_purchaseOrders" action="" method="GET">
                         <div class="input-group py-0 my-0">
                             <input type="text" name="search" class="form-control" id="inputGroupFile02" placeholder="Search">
                             <button type="submit" class="btn btn-success input-group-text" for="inputGroupFile02"> <i class="fas fa-search"></i></button>
@@ -55,58 +55,36 @@
                     <thead>
                         <tr>
                             <th>SL</th>
-                            {{-- <th class="image text-start">Image</th> --}}
-                            <th style="text-align: left !important; ">Name</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            {{-- <th>Country</th>
-                                <th>State</th> --}}
-                            {{-- <th>City</th> --}}
-                            <th>Postcode</th>
-                            <th>Address</th>
+                            <th>Supplier</th>
+                            <th>Total Purchase Quantity</th>
+                            <th>Total Receved Quantity</th>
+                            <th>Total Purchase Amount</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="datatable">
-                        @if (count($suppliers) > 0)
-                        @foreach ($suppliers as $key => $supplier)
+                        @forelse ($purchaseOrders as $key => $purchaseOrder)
                         <tr>
-                            <td>{{ $supplier->id }}</td>
-                            {{-- <td>
-                                            <img src="{{ asset('uploads/suppliers/' . $supplier->thumbnail) }}"
-                            alt="{{ $supplier->thumbnail }}" width="80">
-                            </td> --}}
-                            <td class="supplier-name text-start" style="line-height:1.5; min-width:150px">
-                                <p>{{ $supplier->name }}</p>
-                            </td>
-                            <td>{{ $supplier->email }}</td>
-                            <td>{{ $supplier->phone }}</td>
-                            {{-- <td>{{ $supplier->country }}</td>
-                            <td>{{ $supplier->state }}</td> --}}
-                            {{-- <td>{{ $supplier->city }}</td> --}}
-                            <td>{{ $supplier->postcode }}</td>
-                            <td style="width:20%">{{ $supplier->address }}</td>
-                            {{-- <td>{{ $supplier->previous_due }}</td> --}}
-
-
-                            <td style="min-width:130px" class="d-flex my-4 text-center">
-
-                                <form action="{{ route('admin.suppliers.destroy', $supplier->id) }}" method="POST" style="display: inline;">
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $purchaseOrder->supplier_name ?? 'N/A' }}</td>
+                            <td>{{ $purchaseOrder->total_purchase_qty }}</td>
+                            <td>{{ $purchaseOrder->total_received_qty }}</td>
+                            <td>{{ $purchaseOrder->total_purchase_amount }}</td>
+                            <td>
+                                <form action="{{ route('admin.purchase-orders.destroy', $purchaseOrder->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger delete" onclick="return confirm('Are you sure?')"> <i class="fas fa-trash-can"></i></button>
                                 </form>
                             </td>
                         </tr>
-                        @endforeach
-                        @else
+                        @empty
                         <tr class="h-50">
-                            <td colspan="13">
+                            <td colspan="5">
                                 <h4 class="fs-4">No data found</h4>
                             </td>
                         </tr>
-                        @endif
-
+                        @endforelse
                     </tbody>
                 </table>
 
@@ -165,17 +143,17 @@
                             <!-- Information about displayed entries -->
                             <div class="dataTables_info pl-2">
                                 Showing
-                                <span id="showing-entries-from">{{ $suppliers->firstItem() }}</span>
+                                <span id="showing-entries-from">{{ $purchaseOrders->firstItem() }}</span>
                                 to
-                                <span id="showing-entries-to">{{ $suppliers->lastItem() }}</span>
+                                <span id="showing-entries-to">{{ $purchaseOrders->lastItem() }}</span>
                                 of
-                                <span id="total-entries">{{ $suppliers->total() }}</span>
+                                <span id="total-entries">{{ $purchaseOrders->total() }}</span>
                                 entries
                             </div>
                         </div>
                         <!-- ... (remaining content) -->
-                        {{ $suppliers->links('components.pagination.default') }}
-                        {{-- {{ $suppliers->appends(request()->except('page'))->links() }} --}}
+                        {{ $purchaseOrders->links('components.pagination.default') }}
+                        {{-- {{ $purchaseOrders->appends(request()->except('page'))->links() }} --}}
                     </div>
                 </div>
             </div>

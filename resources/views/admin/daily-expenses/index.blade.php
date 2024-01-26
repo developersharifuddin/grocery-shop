@@ -70,7 +70,7 @@
                             <th>Expense Date</th>
                             <th>Amount</th>
                             <th>Approved Status</th>
-                            <th>Actions</th>
+                            {{-- <th>Actions</th> --}}
                         </tr>
                     </thead>
                     <tbody id="datatable">
@@ -91,16 +91,16 @@
                                 <span class="{{ $badgeClass }}">{{ $expense->approved_status === 'Approved' ? 'Approved' : 'Non-Approved' }}</span>
                             </td>
 
-                            <td>
+                            {{-- <td>
                                 <form action="{{ route('admin.daily-expenses.destroy', $expense->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger delete" onclick="return confirm('Are you sure?')">
-                                        <i class="fas fa-trash-can"></i>
-                                    </button>
-                                </form>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger delete" onclick="return confirm('Are you sure?')">
+                                <i class="fas fa-trash-can"></i>
+                            </button>
+                            </form>
 
-                            </td>
+                            </td> --}}
 
                         </tr>
                         @endforeach

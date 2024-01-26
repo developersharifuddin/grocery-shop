@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('company');
             $table->string('store');
             $table->date('expense_date');
-            $table->decimal('amount');
+            $table->decimal('amount', 20, 2);
             $table->string('approved_status');
             $table->softDeletes();
             $table->timestamps();

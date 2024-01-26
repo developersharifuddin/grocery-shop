@@ -12,8 +12,8 @@ class DailyExpenses extends Model
     use HasFactory;
     use SoftDeletes;
     use Filterable;
-    // protected $dates = ['deleted_at'];
-    // protected $primaryKey = 'id';
+    protected $dates = ['deleted_at'];
+    protected $primaryKey = 'id';
 
     protected $guarded = [];
     protected $fillable = [
@@ -25,8 +25,8 @@ class DailyExpenses extends Model
         'approved_status',
         'amount',
         'deleted_at',
-        'id',
     ];
+
     public function hasPagination($query, $request)
     {
         return $query->paginate($request->input('per_page', 10));

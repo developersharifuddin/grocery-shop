@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\DailyExpenses;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDailyExpensesRequest;
+use App\Http\Requests\UpdateDailyExpensesRequest;
 
 class DailyExpensesController extends Controller
 {
@@ -69,11 +70,10 @@ class DailyExpensesController extends Controller
     {
         return view('admin.daily-expenses.create');
     }
-
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDailyExpensesRequest $request)
     {
         $request->validate([
             // Add your validation rules here
@@ -90,7 +90,7 @@ class DailyExpensesController extends Controller
      */
     public function show(DailyExpenses $dailyExpenses)
     {
-        return view('admin.daily-expenses.show', compact('dailyExpenses'));
+        //
     }
 
     /**
@@ -98,31 +98,20 @@ class DailyExpensesController extends Controller
      */
     public function edit(DailyExpenses $dailyExpenses)
     {
-        return view('admin.daily-expenses.edit', compact('dailyExpenses'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DailyExpenses $dailyExpenses)
+    public function update(UpdateDailyExpensesRequest $request, DailyExpenses $dailyExpenses)
     {
-        $request->validate([
-            // Add your validation rules here
-        ]);
-
-        $dailyExpenses->update($request->all());
-
-        return redirect()->route('admin.daily-expenses.index')
-            ->with('success', 'Expense updated successfully.');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-
-
-
-
     public function destroy(DailyExpenses $dailyExpenses)
     {
         // try {

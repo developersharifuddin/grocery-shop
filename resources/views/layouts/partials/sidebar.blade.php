@@ -116,355 +116,96 @@
                                   </p>
                               </a>
                           </li>
-                          <li class="nav-item">
-                              <a href="{{ url('admin/products') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-copy"></i>
-                                  <p>
-                                      Manage Products
-                                  </p>
-                              </a>
-                          </li>
-                          <li class="nav-item">
-                              <a href="{{ url('admin/product/barcode/create') }}" class="nav-link {{ request()->is('admin/product/barcode*') ? 'active' : '' }}">
-                                  <i class="nav-icon fas fa-copy"></i>
-                                  <p>
-                                      Barcode Generate
-                                  </p>
-                              </a>
-                          </li>
 
+                      </ul>
+                  </li>
 
-
-
-
-
-
-
-                          {{-- <li class="nav-item">
-                              <a href="{{ url('admin/categories') }}"
-                          class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
-                          <i class="fa-solid fa-list-check"></i>
+                  <li class="nav-item">
+                      <a href="{{ url('admin/products') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-copy"></i>
                           <p>
-                              Product Category
+                              Manage Products
                           </p>
-                          </a>
-                  </li> --}}
+                      </a>
+                  </li>
 
-                  {{-- <li class="nav-item">
-                              <a href="{{ url('admin/brand') }}" class="nav-link">
-                  <i class="fa-solid fa-list-check"></i>
-                  <p>
-                      Product Brand
-                  </p>
-                  </a>
-                  </li> --}}
-                  {{-- <li class="nav-item">
-                              <a href="{{ url('admin/color') }}" class="nav-link">
-                  <i class="fa-solid fa-list-check"></i>
-                  <p>
-                      Product Color
-                  </p>
-                  </a>
+                  <li class="nav-item">
+                      <a href="{{ url('admin/customers') }}" class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              All Customers
+                          </p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="{{ url('admin/suppliers') }}" class="nav-link {{ request()->is('admin/suppliers*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              All Suppliers
+                          </p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="{{ url('admin/sales') }}" class="nav-link {{ request()->is('admin/sales*') ? 'active' : '' }}">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              Sales
+                          </p>
+                      </a>
+                  </li>
+
+
+
+
+                  <li class="nav-item">
+                      <a href="{{ url('admin/daily-expenses') }}" class="nav-link">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              daily-expenses
+                          </p>
+                      </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ url('admin/size') }}" class="nav-link">
-                          <i class="fa-solid fa-list-check"></i>
+                      <a href="{{ url('admin/money-lending') }}" class="nav-link">
+                          <i class="nav-icon fas fa-copy"></i>
                           <p>
-                              Product Size
+                              Money-lending
                           </p>
                       </a>
-                  </li> --}}
-
-
-                  {{-- <li class="nav-item">
-                              <a href="{{ url('admin/uom/set') }}" class="nav-link">
-                  <i class="fa-solid fa-list-check"></i>
-                  <p>
-                      Product Unit Set
-                  </p>
-                  </a>
-                  </li> --}}
-
-                  {{-- <li class="nav-item">
-                              <a href="{{ url('admin/uom') }}" class="nav-link">
-                  <i class="fa-solid fa-list-check"></i>
-                  <p>
-                      Product Unit
-                  </p>
-                  </a>
-                  </li> --}}
-
-                  {{--
-                          <li class="nav-item">
-                              <a href="{{ url('admin/products') }}" class="nav-link">
-                  <i class="fa-solid fa-list-check"></i>
-                  <p>
-                      Manage Products
-                  </p>
-                  </a>
-                  </li> --}}
-              </ul>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/customers') }}" class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          All Customers
-                      </p>
-                  </a>
-              </li>
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/suppliers') }}" class="nav-link {{ request()->is('admin/suppliers*') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          All Suppliers
-                      </p>
-                  </a>
-              </li>
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/sales') }}" class="nav-link {{ request()->is('admin/sales*') ? 'active' : '' }}">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          Sales
-                      </p>
-                  </a>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/daily-expenses') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          daily-expenses
-                      </p>
-                  </a>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          Company Setup
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/store') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Manage Store
-                              </p>
-                          </a>
-                      </li>
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/discount-decleare') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Discount Declearations
-                              </p>
-                          </a>
-                      </li>
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/employee') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Manage Employee
-                              </p>
-                          </a>
-                      </li>
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/seller') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Manage Seller
-                              </p>
-                          </a>
-                      </li>
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/expense') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Manage Expense
-                              </p>
-                          </a>
-                      </li>
-
-
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/roles') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Roles
-                              </p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="{{ url('admin/permissions') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Permissions
-                              </p>
-                          </a>
-                      </li>
-
-                  </ul>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          Inventoty
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                      {{-- <li class="nav-item">
-                              <a href="{{ url('admin/assign-product-to-sales-man') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Product Assign to Sales Man
-                      </p>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ url('admin/purchase-orders') }}" class="nav-link">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              purchase orders
+                          </p>
                       </a>
-              </li>
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/hand-over-product-to-sales-man') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Hand-over-product-to-sales-man
-                      </p>
-                  </a>
-              </li>
+                  </li>
 
 
-              <li class="nav-item">
-                  <a href="{{ url('admin/update-sales-status') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Update-sales-status
-                      </p>
-                  </a>
-              </li>
+                  <li class="nav-item">
+                      <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-copy"></i>
+                          <p>
+                              Reports
+                              <i class="fas fa-angle-left right"></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
 
+                          <li class="nav-item">
+                              <a href="#" class="nav-link">
+                                  <i class="fa-solid fa-list-check"></i>
+                                  <p>
+                                      Daily Sells Report
+                                  </p>
+                              </a>
+                          </li>
 
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/sells-return') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Sells-return
-                      </p>
-                  </a>
-              </li>
-
-
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/purchase-order') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Purchase-order
-                      </p>
-                  </a>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/purchase-order-receive') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Purchase-order-receive
-                      </p>
-                  </a>
-              </li>
-
-
-              <li class="nav-item">
-                  <a href="{{ url('admin/purchase-return') }}" class="nav-link">
-                      <i class="fa-solid fa-list-check"></i>
-                      <p>
-                          Purchase-return
-                      </p>
-                  </a>
-              </li>
-
-
-              </ul>
-              </li>
-
-
-
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          Commercials
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/cash-collection') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Cash-collection
-                              </p>
-                          </a>
-                      </li>
-
-                      <li class="nav-item">
-                          <a href="{{ url('admin/payment-to-seller') }}" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  payment-to-seller
-                              </p>
-                          </a>
-                      </li> --}}
-
-                  </ul>
-              </li>
-
-
-
-              <li class="nav-item">
-                  <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                          Reports
-                          <i class="fas fa-angle-left right"></i>
-                      </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-
-                      <li class="nav-item">
-                          <a href="#" class="nav-link">
-                              <i class="fa-solid fa-list-check"></i>
-                              <p>
-                                  Daily Sells Report
-                              </p>
-                          </a>
-                      </li>
-
-                  </ul>
-              </li>
-
+                      </ul>
+                  </li>
 
 
 
