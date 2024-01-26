@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sells', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->integer('customer_id')->nullable();
             $table->longText('shipping_address')->nullable();

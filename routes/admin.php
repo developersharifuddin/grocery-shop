@@ -25,11 +25,12 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HK\BrandController;
 use App\Http\Controllers\Admin\HK\ColorController;
 use App\Http\Controllers\Admin\ItemInfoController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\NewOrderPlacedController;
 use App\Http\Controllers\Admin\HK\UomSetController;
 use App\Http\Controllers\Admin\HK\CategoryController;
 use App\Http\Controllers\Admin\PointOfSaleController;
-use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\DailyExpensesController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
@@ -95,11 +96,6 @@ Route::middleware([
     Route::get('/expense', function () {
         return view('admin.expense.index');
     })->name('expense');
-
-    // daily-expense Routes
-    Route::get('/daily-expense', function () {
-        return view('admin.daily-expense.index');
-    })->name('daily-expense');
 
 
     // products Routes
@@ -233,9 +229,7 @@ Route::middleware([
     Route::get('/loadProduct', [ItemInfoController::class, 'loadProduct'])->name('loadProduct');
 
 
-
-
-
+    Route::resource('/daily-expenses', DailyExpensesController::class);
 
 
 
@@ -255,18 +249,3 @@ Route::middleware([
 Route::get('process', [DataController::class, 'processLargeData'])->name('data-process-start');
 
 Route::get('/create-order', [NewOrderPlacedController::class, 'store']);
-
-// Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'web']], function () {
-
-// });
-
-
-///register
-
-// Route::get('user/register', [UserController::class, 'showRegistrationForm'])->name('register.form');
-// Route::post('user/register', [UserController::class, 'register'])->name('register');
-
-
-// Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
-// Route::post('/login', [LoginController::class, 'login'])->name('login');
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
