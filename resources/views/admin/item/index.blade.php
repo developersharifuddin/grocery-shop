@@ -8,7 +8,7 @@
 @section('breadcrumb')
     <li class="breadcrumb-item"> <a href="{{ route('admin.dashboard') }}" class="text-primary"><i class="fa fa-home"></i></a>
     </li>
-    <li class="breadcrumb-item text-dark"><a href="{{ route('admin.brand') }}">product</a></li>
+    <li class="breadcrumb-item text-dark"><a href="{{ route('admin.brands.index') }}">product</a></li>
 @endsection
 
 

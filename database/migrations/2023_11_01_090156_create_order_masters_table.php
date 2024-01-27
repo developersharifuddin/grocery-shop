@@ -14,9 +14,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_masters', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id(); 
-=======
             $table->id();
             $table->string('email');
             $table->string('phone');
@@ -43,7 +40,6 @@ return new class extends Migration
             $table->string('payment_note');
             $table->string('sent_sms');
             $table->string('status')->default('Pending');
->>>>>>> 45766a2e5ce09343def635b34ddc72eda13f3c90
             $table->timestamps();
         });
     }
