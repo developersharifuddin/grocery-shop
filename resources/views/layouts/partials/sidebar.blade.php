@@ -5,9 +5,11 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center border-bottom border-dark">
           <div class="image">
               @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-              <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                  <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                      alt="{{ Auth::user()->name }}" />
               @endif
-              <img src="{{ asset('backend/dist/img/dms.png') }}" class="img" alt="User Image" style="height: 44px; width:auto;">
+              <img src="{{ asset('backend/dist/img/dms.png') }}" class="img" alt="User Image"
+                  style="height: 44px; width:auto;">
           </div>
 
           {{-- <div class="info">
@@ -20,7 +22,8 @@
 
           <div class="form-inline mb-4 mt-0">
               <div class="input-group bg-transparent" data-widget="sidebar-search">
-                  <input class="form-control form-control-sidebar bg-transparent" type="search" placeholder="Search" aria-label="Search">
+                  <input class="form-control form-control-sidebar bg-transparent" type="search" placeholder="Search"
+                      aria-label="Search">
                   <div class="input-group-append">
                       <button class="btn btn-sidebar bg-transparent">
                           <i class="fas fa-search fa-fw"></i>
@@ -32,7 +35,8 @@
                           <div class="search-title"><strong class="text-light">
                               </strong>N<strong class="text-light"></strong>
                               o<strong class="text-light"></strong> <strong class="text-light"></strong>e
-                              <strong class="text-light"></strong>l<strong class="text-light"></strong>e<strong class="text-light">
+                              <strong class="text-light"></strong>l<strong class="text-light"></strong>e<strong
+                                  class="text-light">
                               </strong>m<strong class="text-light"></strong>e<strong class="text-light"></strong>n
                               <strong class="text-light"></strong>t<strong class="text-light"></strong>
                               <strong class="text-light"></strong>f<strong class="text-light"></strong>o
@@ -49,13 +53,14 @@
                   font-size: 13px !important;
                   color: #f6f6f6;
               }
-
           </style>
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column nav-collapse-hide-child nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
+              <ul class="nav nav-pills nav-sidebar flex-column nav-collapse-hide-child nav-child-indent nav-legacy"
+                  data-widget="treeview" role="menu" data-accordion="false">
                   <li class="nav-item">
-                      <a href="{{ url('admin/dashboard') }}" class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
+                      <a href="{{ url('admin/dashboard') }}"
+                          class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-tachometer-alt"></i>
                           <p>
                               Dashboard
@@ -76,7 +81,8 @@
 
 
                           <li class="nav-item">
-                              <a href="{{ url('admin/categories') }}" class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
+                              <a href="{{ url('admin/categories') }}"
+                                  class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p>
                                       All Categories
@@ -85,7 +91,8 @@
                           </li>
 
                           <li class="nav-item">
-                              <a href="{{ url('admin/brands') }}" class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
+                              <a href="{{ url('admin/brands') }}"
+                                  class="nav-link {{ request()->is('admin/brands*') ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p>
                                       All Brands
@@ -93,7 +100,8 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ url('admin/uoms') }}" class="nav-link {{ request()->is('admin/uoms*') ? 'active' : '' }}">
+                              <a href="{{ url('admin/uoms') }}"
+                                  class="nav-link {{ request()->is('admin/uoms*') ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p>
                                       All UOM
@@ -101,7 +109,8 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ url('admin/sizes') }}" class="nav-link {{ request()->is('admin/sizes*') ? 'active' : '' }}">
+                              <a href="{{ url('admin/sizes') }}"
+                                  class="nav-link {{ request()->is('admin/sizes*') ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p>
                                       All Sizes
@@ -109,7 +118,8 @@
                               </a>
                           </li>
                           <li class="nav-item">
-                              <a href="{{ url('admin/colors') }}" class="nav-link {{ request()->is('admin/colors*') ? 'active' : '' }}">
+                              <a href="{{ url('admin/colors') }}"
+                                  class="nav-link {{ request()->is('admin/colors*') ? 'active' : '' }}">
                                   <i class="nav-icon fas fa-copy"></i>
                                   <p>
                                       All Colors
@@ -121,7 +131,8 @@
                   </li>
 
                   <li class="nav-item">
-                      <a href="{{ url('admin/products') }}" class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
+                      <a href="{{ url('admin/products') }}"
+                          class="nav-link {{ request()->is('admin/products*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                               Manage Products
@@ -130,7 +141,8 @@
                   </li>
 
                   <li class="nav-item">
-                      <a href="{{ url('admin/customers') }}" class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
+                      <a href="{{ url('admin/customers') }}"
+                          class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                               All Customers
@@ -139,7 +151,8 @@
                   </li>
 
                   <li class="nav-item">
-                      <a href="{{ url('admin/suppliers') }}" class="nav-link {{ request()->is('admin/suppliers*') ? 'active' : '' }}">
+                      <a href="{{ url('admin/suppliers') }}"
+                          class="nav-link {{ request()->is('admin/suppliers*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                               All Suppliers
@@ -148,7 +161,8 @@
                   </li>
 
                   <li class="nav-item">
-                      <a href="{{ url('admin/sales') }}" class="nav-link {{ request()->is('admin/sales*') ? 'active' : '' }}">
+                      <a href="{{ url('admin/sales') }}"
+                          class="nav-link {{ request()->is('admin/sales*') ? 'active' : '' }}">
                           <i class="nav-icon fas fa-copy"></i>
                           <p>
                               Sales
@@ -196,13 +210,44 @@
                       <ul class="nav nav-treeview">
 
                           <li class="nav-item">
-                              <a href="#" class="nav-link">
-                                  <i class="fa-solid fa-list-check"></i>
+                              <a href="{{ url('admin/transactions-detailed-by-customer') }}"
+                                  class="nav-link {{ request()->is('admin/transactions-detailed-by-customer*') ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-copy"></i>
                                   <p>
-                                      Daily Sells Report
+                                      transactions-detailed-by-customer
                                   </p>
                               </a>
                           </li>
+                          <li class="nav-item">
+                              <a href="{{ url('admin/transactions-detailed-by-supplier') }}"
+                                  class="nav-link {{ request()->is('admin/transactions-detailed-by-supplier*') ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-copy"></i>
+                                  <p>
+                                      transactions-detailed-by-supplier
+                                  </p>
+                              </a>
+                          </li>
+
+                          <li class="nav-item">
+                              <a href="{{ url('admin/transactions-detailed-by-customer') }}"
+                                  class="nav-link {{ request()->is('admin/transactions-detailed-by-customer*') ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-copy"></i>
+                                  <p>
+                                      transactions-detailed-by-customer
+                                  </p>
+                              </a>
+                          </li>
+
+                          <li class="nav-item">
+                              <a href="{{ url('admin/transactions-detailed-by-customer') }}"
+                                  class="nav-link {{ request()->is('admin/transactions-detailed-by-customer*') ? 'active' : '' }}">
+                                  <i class="nav-icon fas fa-copy"></i>
+                                  <p>
+                                      transactions-detailed-by-customer
+                                  </p>
+                              </a>
+                          </li>
+
 
                       </ul>
                   </li>

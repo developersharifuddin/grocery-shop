@@ -21,6 +21,8 @@ use App\Http\Controllers\Admin\HK\CategoryController;
 use App\Http\Controllers\Admin\MoneyLendingController;
 use App\Http\Controllers\Admin\DailyExpensesController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
+use App\Http\Controllers\Report\CustomerTrasactionDetails;
+use App\Http\Controllers\Report\SupplierTrasactionDetails;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 
@@ -77,10 +79,16 @@ Route::middleware([
     Route::resource('/daily-expenses', DailyExpensesController::class);
     Route::resource('/purchase-orders', PurchaseOrdersController::class);
 
+    // report
+    //transactions-detailed-by-customer
+    Route::get('/transactions-detailed-by-customer', [CustomerTrasactionDetails::class, 'index'])->name('transdetailsbycustomer.index');
+    Route::post('/transactions-detailed-by-customer-find', [CustomerTrasactionDetails::class, 'find'])->name('transdetailsbycustomer.find');
+    Route::get('/transactions-detailed-by-customer-find-report', [CustomerTrasactionDetails::class, 'transPdf'])->name('transdetailsbycustomer.report.pdf');
 
-    //report
-    // Route::get('/transactions-detailed-by-customer.', [ItemInfoController::class, 'loadProduct'])->name('loadProduct');
-
+    //transactions-detailed-by-supplier
+    Route::get('/transactions-detailed-by-supplier', [SupplierTrasactionDetails::class, 'index'])->name('transdetailsbysupplier.index');
+    Route::post('/transactions-detailed-by-supplier-find', [SupplierTrasactionDetails::class, 'find'])->name('transdetailsbysupplier.find');
+    Route::get('/transactions-detailed-by-supplier-find-report', [SupplierTrasactionDetails::class, 'transPdf'])->name('transdetailsbysupplier.report.pdf');
 
 
 

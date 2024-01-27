@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Report;
 
 use PDF;
-use App\Models\Customer;
+use App\Models\PurchaseOrders;
+use App\Models\Supplier;
 use App\Models\ItemInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\Sell;
 
-class CustomerTrasactionDetails extends Controller
+class SupplierTrasactionDetails extends Controller
 {
     public function index(Request $request)
     {
-        $customers = Customer::all();
-        return view('admin.reports.customer.customerTrasactionDetails', with(['customers' => $customers]));
+        $suppliers = Supplier::all();
+        return view('admin.reports.supplier.supplierTrasactionDetails', with(['suppliers' => $suppliers]));
     }
 
 
@@ -25,26 +25,26 @@ class CustomerTrasactionDetails extends Controller
 
         try {
             ini_set('memory_limit', '256M');
-            $id = $request->input('customer_id');
+            $id = $request->input('supplier_id');
             $to_date = $request->input('to_date');
             $from_date = $request->input('from_date');
 
-            if (!$request->has('customer_id') || !$request->has('to_date') && !$request->has('from_date')) {
+            if (!$request->has('supplier_id') || !$request->has('to_date') && !$request->has('from_date')) {
                 abort(400, 'Invalid request parameters');
             }
 
-            $findCustomer = Customer::findOrFail($id);
-            if (!$findCustomer) {
-                abort(404, 'customer not found');
+            $findSupplier = Supplier::findOrFail($id);
+            if (!$findSupplier) {
+                abort(404, 'Supplier not found');
             }
 
-            $customers = Customer::all();
+            $suppliers = Supplier::all();
 
-            $tdForCustomer = Sell::where('customer_id', $id)
+            $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
                 ->whereBetween('created_at', [$to_date, $from_date])
-                ->select(['id', 'customer_id', 'payable'])
+                ->select(['id', 'supplier_id', 'total_purchase_amount'])
                 ->get();
-            // dd($findCustomer);
+            // dd($findSupplier);
             $batchSize = 500;
             $transaction = [];
 
@@ -52,7 +52,7 @@ class CustomerTrasactionDetails extends Controller
                 $end = min($start + $batchSize, $to_date);
 
                 for ($i = $start; $i < $end; $i++) {
-                    $transactionValue = $tdForCustomer;
+                    $transactionValue = $tdForSupplier;
                     try {
                         $transaction[] = $transactionValue;
                     } catch (\Exception $e) {
@@ -62,10 +62,10 @@ class CustomerTrasactionDetails extends Controller
                 }
             }
 
-            return view('admin.reports.customer.customerTrasactionDetails')->with([
-                'findCustomer' => $findCustomer,
-                'customers' => $customers,
-                'tdForCustomer' => $tdForCustomer,
+            return view('admin.reports.supplier.supplierTrasactionDetails')->with([
+                'findSupplier' => $findSupplier,
+                'suppliers' => $suppliers,
+                'tdForSupplier' => $tdForSupplier,
                 'from_date' => $from_date, 'to_date' => $to_date, 'id' => $id,
             ]);
         } catch (\Exception $e) {
@@ -84,31 +84,31 @@ class CustomerTrasactionDetails extends Controller
         ini_set("memory_limit", "4096M");
         ini_set('max_execution_time', 600);
 
-        $id = $request->input('customer_id');
+        $id = $request->input('supplier_id');
         $to_date = $request->input('to_date');
         $from_date = $request->input('from_date');
 
-        $tdForCustomer = Sell::where('customer_id', $id)
+        $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
             ->whereBetween('created_at', [$to_date, $from_date])
-            ->select(['id', 'customer_id', 'payable'])
+            ->select(['id', 'supplier_id', 'total_purchase_amount'])
             ->get();
 
-        $findCustomer = Customer::findOrFail($id);
+        $findSupplier = Supplier::findOrFail($id);
 
-        if (!$findCustomer) {
-            abort(404, 'Customer not found');
+        if (!$findSupplier) {
+            abort(404, 'Supplier not found');
         }
 
-        $tdForCustomer = Sell::where('customer_id', $id)
+        $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
             ->whereBetween('created_at', [$to_date, $from_date])
-            ->select(['id', 'customer_id', 'payable'])
+            ->select(['id', 'supplier_id', 'total_purchase_amount'])
             ->get();
 
         $batchSize = 500;
         $transaction = [];
 
-        // Split the $tdForCustomer collection into batches
-        $chunks = $tdForCustomer->chunk($batchSize);
+        // Split the $tdForSupplier collection into batches
+        $chunks = $tdForSupplier->chunk($batchSize);
 
         foreach ($chunks as $chunk) {
             foreach ($chunk as $value) {
@@ -124,8 +124,8 @@ class CustomerTrasactionDetails extends Controller
 
         // dd($transaction);
 
-        $filename = $findCustomer->name . '.pdf';
-        $pdf = PDF::loadView('admin.reports.customer.customerTrasactionDetailsPDF', ['data' => $findCustomer, 'transaction' => $transaction], [], [
+        $filename = $findSupplier->name . '.pdf';
+        $pdf = PDF::loadView('admin.reports.supplier.supplierTrasactionDetailsPDF', ['data' => $findSupplier, 'transaction' => $transaction], [], [
             'mode' => '',
             'format' => 'A4-P',
             'default_font_size' => '12',
