@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('name');
             $table->text('price');
-            $table->integer('status')->default('Pending');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
