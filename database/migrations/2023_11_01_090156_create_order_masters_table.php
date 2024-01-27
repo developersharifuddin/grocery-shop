@@ -14,12 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_masters', function (Blueprint $table) {
-            $table->id();
-            $table->string('email');
-            $table->string('phone');
-            $table->string('name');
-            $table->text('price');
-            $table->string('status')->default('Pending');
+            $table->id(); 
             $table->timestamps();
         });
     }
