@@ -4,6 +4,7 @@
 use App\Http\Controllers\ImportCsv;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\Report\MoneyLending;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SellController;
 use App\Http\Controllers\Admin\AdminController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\HK\UomController;
 use App\Http\Controllers\Admin\BarcodeController;
 use App\Http\Controllers\Admin\HK\ColorContrller;
 use App\Http\Controllers\Admin\HK\SizeController;
+use App\Http\Controllers\Report\MothlyProfitLoss;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\HK\BrandController;
 use App\Http\Controllers\Admin\ItemInfoController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\NewOrderPlacedController;
 use App\Http\Controllers\Admin\HK\CategoryController;
 use App\Http\Controllers\Admin\MoneyLendingController;
+use App\Http\Controllers\Report\MoneyLendingCotroller;
 use App\Http\Controllers\Admin\DailyExpensesController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Report\CustomerTrasactionDetails;
@@ -89,6 +92,16 @@ Route::middleware([
     Route::get('/transactions-detailed-by-supplier', [SupplierTrasactionDetails::class, 'index'])->name('transdetailsbysupplier.index');
     Route::post('/transactions-detailed-by-supplier-find', [SupplierTrasactionDetails::class, 'find'])->name('transdetailsbysupplier.find');
     Route::get('/transactions-detailed-by-supplier-find-report', [SupplierTrasactionDetails::class, 'transPdf'])->name('transdetailsbysupplier.report.pdf');
+
+    //mothlyProfitLoss
+    Route::get('/mothlyProfitLoss', [MothlyProfitLoss::class, 'index'])->name('mothlyProfitLoss.index');
+    Route::post('/mothlyProfitLoss-find', [MothlyProfitLoss::class, 'find'])->name('mothlyProfitLoss.find');
+    Route::get('/mothlyProfitLoss-find-report', [MothlyProfitLoss::class, 'transPdf'])->name('mothlyProfitLoss.report.pdf');
+
+    //moneyLending
+    Route::get('/moneyLending', [MoneyLendingCotroller::class, 'index'])->name('moneyLending.index');
+    Route::post('/moneyLending-find', [MoneyLendingCotroller::class, 'find'])->name('moneyLending.find');
+    Route::get('/moneyLending-find-report', [MoneyLendingCotroller::class, 'transPdf'])->name('moneyLending.report.pdf');
 
 
 

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Report;
 
 use PDF;
-use App\Models\PurchaseOrders;
-use App\Models\Supplier;
 use App\Models\ItemInfo;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use App\Models\PurchaseOrders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -42,8 +42,9 @@ class SupplierTrasactionDetails extends Controller
 
             $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
                 ->whereBetween('created_at', [$to_date, $from_date])
-                ->select(['id', 'supplier_id', 'total_purchase_amount'])
+                ->select(['id', 'supplier_id', 'total_purchase_qty', 'total_received_qty', 'total_purchase_amount'])
                 ->get();
+
             // dd($findSupplier);
             $batchSize = 500;
             $transaction = [];
@@ -88,10 +89,7 @@ class SupplierTrasactionDetails extends Controller
         $to_date = $request->input('to_date');
         $from_date = $request->input('from_date');
 
-        $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
-            ->whereBetween('created_at', [$to_date, $from_date])
-            ->select(['id', 'supplier_id', 'total_purchase_amount'])
-            ->get();
+
 
         $findSupplier = Supplier::findOrFail($id);
 
@@ -101,7 +99,7 @@ class SupplierTrasactionDetails extends Controller
 
         $tdForSupplier = PurchaseOrders::where('supplier_id', $id)
             ->whereBetween('created_at', [$to_date, $from_date])
-            ->select(['id', 'supplier_id', 'total_purchase_amount'])
+            ->select(['id', 'supplier_id', 'total_purchase_qty', 'total_received_qty', 'total_purchase_amount'])
             ->get();
 
         $batchSize = 500;

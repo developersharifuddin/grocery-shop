@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $data->name }}</title>
+    <title>{{ $to_date }}</title>
     <style type="text/css">
         @page {
             header: page-header;
@@ -375,52 +375,114 @@
 
 
 
-    @if (isset($transaction))
+    @if (isset($MoneyLendings))
     <div style="display:block; margin-top:10px;">
         <table width="100%">
             <thead>
                 <tr>
                     <th style="text-align: center">SL</th>
-                    <th style="text-align: center">Purchase Order No</th>
-                    <th style="text-align: center">Total Purchase Quantity</th>
-                    <th style="text-align: center">Total Receive Quantity</th>
-                    <th style="text-align: right">Total Purchase Amount(BDT)</th>
+                    <th style="text-align: center">TransID</th>
+                    <th style="text-align: center">name</th>
+                    <th style="text-align: center">name_bangla</th>
+                    <th style="text-align: center">email</th>
+                    <th style="text-align: center">phone</th>
+                    <th style="text-align: center">
+                        division </th>
+                    <th style="text-align: center">
+                        district </th>
+                    <th style="text-align: center">
+                        city </th>
+                    <th style="text-align: center">
+                        Area </th>
+                    <th style="text-align: center">
+                        postcode </th>
+                    <th style="text-align: center">NID</th>
+                    <th style="text-align: center">Country</th>
+                    <th style="text-align: center">permanent_address</th>
+                    <th style="text-align: center">from_date</th>
+                    <th style="text-align: center">to_amount</th>
+                    <th style="text-align: center">recv_amount</th>
+                    <th style="text-align: center">due_amount</th>
+                    <th style="text-align: center">monthly_profit</th>
+                    <th style="text-align: center">is_closed</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($transaction as $key => $value)
+                @foreach ($MoneyLendings as $key => $value)
                 <tr>
-                    <td style="text-align: center">{{ (int) $key + 1 }}</td>
-
+                    <td style="text-align: center">{{ (int) $key + 1 }}
+                    </td>
+                    <td style="text-align: left">
+                        {{ $value->id }}
+                    </td>
+                    <td style="text-align: left">
+                        {{ $value->name }}
+                    </td>
                     <td style="text-align: center">
-                        {{ $value['id'] }}
+                        {{ $value->name_bangla}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->email}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->phone}}
                     </td>
 
                     <td style="text-align: center">
-                        {{ $value['total_purchase_qty'] }}
+                        {{ $value->division}}
                     </td>
-
                     <td style="text-align: center">
-                        {{ $value['total_received_qty'] }}
+                        {{ $value->district}}
                     </td>
-
-                    <td style="text-align: right">
-                        {{ $value['total_purchase_amount'] }}
+                    <td style="text-align: center">
+                        {{ $value->city}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->Area}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->postcode}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->nid}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->country}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->permanent_address}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->from_date}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->to_amount}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->recv_amount}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->due_amount}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->monthly_profit}}
+                    </td>
+                    <td style="text-align: center">
+                        {{ $value->is_closed}}
                     </td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td style="text-align: right;" colspan="2"><strong>Total: </strong></td>
+                    <td style="text-align: right;" colspan="15"><strong>Total: </strong></td>
                     <td style="text-align: right;">
-                        <strong>{{ number_format(collect($transaction)->sum('total_purchase_qty'),0, '.', ',') }} TK</strong>
+                        <strong>{{ number_format($MoneyLendings->sum('to_amount'),2, '.', ',') }} TK.</strong>
                     </td>
                     <td style="text-align: right;">
-                        <strong>{{ number_format(collect($transaction)->sum('total_received_qty'), 0, '.', ',') }} TK</strong>
+                        <strong>{{ number_format($MoneyLendings->sum('recv_amount'),2, '.', ',') }} TK.</strong>
                     </td>
                     <td style="text-align: right;">
-                        <strong>{{ number_format(collect($transaction)->sum('total_purchase_amount'), 2, '.', ',') }} TK</strong>
+                        <strong>{{ number_format($MoneyLendings->sum('due_amount'), 2, '.', ',') }} TK.</strong>
                     </td>
-
                 </tr>
             </tbody>
         </table>

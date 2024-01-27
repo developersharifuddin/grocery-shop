@@ -133,15 +133,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 col-md-3">
-                        <div class="form-group">
-                            <label for="total_purchase_amount">Total Purchase Amount</label>
-                            <input type="number" name="total_purchase_amount" class="form-control @error('total_purchase_amount') is-invalid @enderror" id="total_purchase_amount" value="{{ old('total_purchase_amount') }}" required>
-                            @error('total_purchase_amount')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
 
                     <div class="mb-3 col-md-3">
                         <div class="form-group">

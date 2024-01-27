@@ -25,7 +25,6 @@ class StorePurchaseOrdersRequest extends FormRequest
         return [
             'supplier_id' => 'required|integer',
             'total_purchase_qty' => 'required|integer',
-            'total_purchase_amount' => 'required|numeric',
             'purchased_by' => 'required|integer',
             'items.*.product_id' => 'required|integer',
             'items.*.purchase_qty' => 'required|integer',

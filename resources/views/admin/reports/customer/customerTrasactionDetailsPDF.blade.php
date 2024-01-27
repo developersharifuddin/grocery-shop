@@ -318,6 +318,7 @@
         .col-md-5 {
             padding-bottom: -50px;
         }
+
     </style>
 </head>
 
@@ -364,10 +365,10 @@
 
         <div class="report_params_areas" style="float:left;height:20px;width:100%">
             @if (isset($data))
-                <span style="text-align: right; font-size:12px">
-                    <strong>Customer Name:</strong> {{ $data->name }}</span><br>
-                <span style="text-align: right; font-size:12px">
-                    <strong>Customer Phone:</strong> {{ $data->phone }} </span>
+            <span style="text-align: right; font-size:12px">
+                <strong>Customer Name:</strong> {{ $data->name }}</span><br>
+            <span style="text-align: right; font-size:12px">
+                <strong>Customer Phone:</strong> {{ $data->phone }} </span>
             @endif
         </div>
     </div>
@@ -375,45 +376,45 @@
 
 
     @if (isset($transaction))
-        <div style="display:block; margin-top:10px;">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <th style="text-align: center">SL</th>
-                        <th style="text-align: left">#Order ID</th>
-                        <th style="text-align: left">#Customer ID</th>
-                        <th style="text-align: right">Amount(BDT)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($transaction as $key => $value)
-                        <tr>
-                            <td style="text-align: center">{{ (int) $key + 1 }}</td>
-                            <td style="text-align: left">
-                                {{ $value['id'] }}
-                            </td>
+    <div style="display:block; margin-top:10px;">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <th style="text-align: center">SL</th>
+                    <th style="text-align: left">#Order ID</th>
+                    <th style="text-align: left">#Customer ID</th>
+                    <th style="text-align: right">Amount(BDT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($transaction as $key => $value)
+                <tr>
+                    <td style="text-align: center">{{ (int) $key + 1 }}</td>
+                    <td style="text-align: left">
+                        {{ $value['id'] }}
+                    </td>
 
-                            <td style="text-align: left">
-                                {{ $value['customer_id'] }}
-                            </td>
+                    <td style="text-align: left">
+                        {{ $value['customer_id'] }}
+                    </td>
 
-                            <td style="text-align: right">
-                                {{ $value['payable'] }}
-                            </td>
-                        </tr>
-                    @endforeach
-                    <tr>
-                        <td style="text-align: right;" colspan="3"><strong>Total: </strong></td>
-                        <td style="text-align: right;">
-                            <strong>{{ number_format(collect($transaction)->sum('payable'), 2, '.', ',') }} TK</strong>
-                        </td>
+                    <td style="text-align: right">
+                        {{ $value['payable'] }}
+                    </td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td style="text-align: right;" colspan="3"><strong>Total: </strong></td>
+                    <td style="text-align: right;">
+                        <strong>{{ number_format(collect($transaction)->sum('payable'), 2, '.', ',') }} TK</strong>
+                    </td>
 
-                    </tr>
-                </tbody>
-            </table>
+                </tr>
+            </tbody>
+        </table>
         @else
-            <p>No customers available.</p>
-    @endif
+        <p>No customers available.</p>
+        @endif
 
     </div>
     <htmlpagefooter name="page-footer">
@@ -422,8 +423,7 @@
         </div>
         <div class="col-md-6">
             <p style="text-align: right; font-size: 14px;"><span><strong>Grocery Shop </strong><span><br>
-                        <span style="font-size: 12px;">A product of</span><span
-                            style="font-size:14px; color:rgb(235,31,40); "><strong> DEVeloperTest</strong></span>
+                        <span style="font-size: 12px;">A product of</span><span style="font-size:14px; color:rgb(235,31,40); "><strong> DeveloperTest</strong></span>
             </p>
         </div>
     </htmlpagefooter>

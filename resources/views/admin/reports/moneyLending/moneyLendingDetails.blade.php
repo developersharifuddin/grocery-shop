@@ -64,27 +64,11 @@
 <div class="row">
     <div class="card bg-white p-0">
         <div class="card-header bg-light">
-            <form action="{{ route('admin.transdetailsbysupplier.find') }}" class="form-horizontal" id="sales-form" method="POST" accept-charset="utf-8">
+            <form action="{{ route('admin.moneyLending.find') }}" class="form-horizontal" id="sales-form" method="POST" accept-charset="utf-8">
                 @csrf
                 @method('POST')
 
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3">
-                        <label for="supplier_id">Supplier <span class="d-inline text-danger">*</span></label>
-                        <div class="input-group">
-                            <select name="supplier_id" class="form-select @error('supplier_id') is-invalid @enderror" id="supplier_id" required>
-                                <option value="">-- Select supplier --</option>
-                                @foreach ($suppliers as $supplier)
-                                <option value="{{ $supplier->id }}">
-                                    {{ $supplier->name . '-' . $supplier->phone }}
-                                </option>
-                                @endforeach
-                            </select>
-                            @error('supplier_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
 
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="form-group">
@@ -118,58 +102,84 @@
 
 
 
-        <div class="container p-4">
-            @if (isset($tdForSupplier) && count($tdForSupplier) > 0)
-            <h4>Supplier Information</h4>
-            @if ($id && $from_date && $to_date)
-            <a href="{{ url('/admin/transactions-detailed-by-supplier-find-report') }}?supplier_id={{ $id }}&from_date={{ $from_date }}&to_date={{ $to_date }}" target="_blank" class="btn btn-success float-md-right mr-4">
+        <div class="container">
+            @if (isset($MoneyLendings) && count($MoneyLendings) > 0)
+            <h5 clas="mt-2">Money Lendings Information</h5>
+            @if ($from_date && $to_date)
+            <a href="{{ url('/admin/moneyLending-find-report') }}?from_date={{ $from_date }}&to_date={{ $to_date }}" target="_blank" class="btn btn-success float-md-right mb-2">
                 Generate PDF
             </a>
             @endif
-            <p class="pb-0 mb-0"><strong>Supplier Name:</strong> {{ $findSupplier->name }}</p>
-            <p class="pb-0 mb-0"><strong>Supplier ID:</strong> {{ $findSupplier->id }}</p>
-            <span><strong>Supplier Phone:</strong> {{ $findSupplier->phone }} </span>
             @endif
 
-            @if (isset($tdForSupplier))
-            @if (isset($tdForSupplier) && count($tdForSupplier) > 0)
+            @if (isset($MoneyLendings))
+            @if (isset($MoneyLendings) && count($MoneyLendings) > 0)
             <div class="card table-responsive border-0 mt-2" style="box-shadow:none !important; ">
                 <div class="row">
                     <table id="example1" class="table table-hover">
                         <thead>
                             <tr>
                                 <th style="text-align: center">SL</th>
-                                <th style="text-align: center">Purchase Order No</th>
-                                <th style="text-align: center">Total Purchase Quantity</th>
-                                <th style="text-align: center">Total Receive Quantity</th>
-                                <th style="text-align: center">Total Purchase Amount(BDT)</th>
+                                <th style="text-align: center">name</th>
+                                <th style="text-align: center">name_bangla</th>
+                                <th style="text-align: center">email</th>
+                                <th style="text-align: center">phone</th>
+                                <th style="text-align: center">permanent_address</th>
+                                <th style="text-align: center">from_date</th>
+                                <th style="text-align: center">to_amount</th>
+                                <th style="text-align: center">recv_amount</th>
+                                <th style="text-align: center">due_amount</th>
+                                <th style="text-align: center">is_closed</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tdForSupplier as $key => $value)
+                            @foreach ($MoneyLendings as $key => $value)
                             <tr>
-                                <td style="text-align: center">{{ (int) $key + 1 }}</td>
+                                <td style="text-align: center">{{ (int) $key + 1 }}
+                                </td>
                                 <td style="text-align: left">
-                                    {{ is_object($value) ? (int) $value->id : '' }}</td>
+                                    {{ $value->name }}
+                                </td>
                                 <td style="text-align: center">
-                                    {{ is_object($value) ? number_format($value->total_purchase_qty) : '' }}</td>
+                                    {{ $value->name_bangla}}
+                                </td>
                                 <td style="text-align: center">
-                                    {{ is_object($value) ? number_format($value->total_received_qty) : '' }}</td>
+                                    {{ $value->email}}
+                                </td>
                                 <td style="text-align: center">
-                                    {{ is_object($value) ? number_format($value->total_purchase_amount) : '' }}</td>
+                                    {{ $value->phone}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->permanent_address}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->from_date}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->to_amount}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->recv_amount}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->due_amount}}
+                                </td>
+                                <td style="text-align: center">
+                                    {{ $value->is_closed}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <td style="text-align: right;" colspan="2"><strong>Total: </strong></td>
+                            <td style="text-align: right;" colspan="8"><strong>Total: </strong></td>
                             <td style="text-align: right;">
-                                <strong>{{ number_format($tdForSupplier->sum('total_purchase_qty'),0, '.', ',') }}</strong>
+                                <strong>{{ number_format($MoneyLendings->sum('to_amount'),2, '.', ',') }} TK.</strong>
                             </td>
                             <td style="text-align: right;">
-                                <strong>{{ number_format($tdForSupplier->sum('total_received_qty'),0, '.', ',') }}</strong>
+                                <strong>{{ number_format($MoneyLendings->sum('recv_amount'),2, '.', ',') }} TK.</strong>
                             </td>
                             <td style="text-align: right;">
-                                <strong>{{ number_format($tdForSupplier->sum('total_purchase_amount'), 2, '.', ',') }} TK.</strong>
+                                <strong>{{ number_format($MoneyLendings->sum('due_amount'), 2, '.', ',') }} TK.</strong>
                             </td>
                         </tfoot>
                     </table>

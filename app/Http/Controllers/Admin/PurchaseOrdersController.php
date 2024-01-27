@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Models\DailyExpenses;
 use App\Models\PurchaseOrders;
+use App\Models\PaymentToSupplier;
 use Illuminate\Support\Facades\DB;
 use App\Models\PurchaseOrdersChild;
 use App\Http\Controllers\Controller;
@@ -102,13 +103,14 @@ class PurchaseOrdersController extends Controller
     {
         try {
             DB::beginTransaction();
+            $itemInfo = ItemInfo::where('id',  $request->input('product_id'))->first();
 
             // Create the main purchase order
             $purchaseOrder = PurchaseOrders::create([
                 'supplier_id' => $request->input('supplier_id'),
                 'total_purchase_qty' => $request->input('total_purchase_qty'),
                 'total_received_qty' => $request->input('total_purchase_qty'),
-                'total_purchase_amount' => $request->input('total_purchase_amount'),
+                'total_purchase_amount' => $itemInfo->purchase_price . $request->input('total_purchase_qty'),
                 'product_id' => $request->input('product_id'),
                 'is_purchased' => $request->has('is_purchased'),
                 'is_received' => $request->has('is_received'),
@@ -119,7 +121,6 @@ class PurchaseOrdersController extends Controller
 
             // Create the child purchase orders
             if ($request->has('children') && is_array($request->input('children'))) {
-                // Create the child purchase orders
                 foreach ($request->input('children') as $childData) {
                     PurchaseOrdersChild::create([
                         'po_id' => $purchaseOrder->id,
@@ -133,12 +134,10 @@ class PurchaseOrdersController extends Controller
             }
 
 
-            // Create the child purchase orders
             foreach ($request->input('product_id') as $productId) {
                 $itemInfo = ItemInfo::where('id', $productId)->first();
 
                 if ($itemInfo) {
-                    // Update the current_stock field by adding the purchase_qty from the child purchase order
                     $currentstock =  $itemInfo->update([
                         'current_stock' => $itemInfo->current_stock + $request->input('total_purchase_qty'),
                     ]);
@@ -146,13 +145,23 @@ class PurchaseOrdersController extends Controller
             }
 
             DailyExpenses::create([
-                'expense_name' => "Purchase Order. Id=" . $purchaseOrder->id,
+                'expense_name' => "Purchase Order & Payment to supplier. SPO Id=" . $purchaseOrder->id,
                 'expense_group' => "Purchase Order",
                 'company' => 'Rabbi Grocery Shop',
                 'store' => 'Main Store',
                 'expense_date' => now(),
                 'approved_status' => 'Approved',
                 'amount' => $request->input('total_purchase_qty'),
+            ]);
+
+
+            PaymentToSupplier::create([
+                'supplier_id' => $purchaseOrder->supplier_id,
+                'spo_id' => $purchaseOrder->id,
+                'payable_amount' => $purchaseOrder->total_purchase_amount,
+                'due_amout' => 0,
+                'paid_amount' =>  $purchaseOrder->total_purchase_amount,
+                'is_closed' =>  $purchaseOrder->is_closed,
             ]);
 
             DB::commit();
