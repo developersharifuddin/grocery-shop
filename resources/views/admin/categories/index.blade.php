@@ -154,18 +154,6 @@
                     <div class="pagination d-flex justify-content-between">
                         <!-- ... (previous content) -->
                         <div class="d-flex">
-                            <!-- Your Blade file -->
-
-                            {{-- <form method="GET" action="{{ route('admin.categories.index') }}">
-                            <label for="per_page">Entries per Page:</label>
-                            <select name="per_page" id="per_page" onchange="this.form.submit()">
-                                <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                                <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
-                                <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
-                                <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
-                            </select>
-                            </form> --}}
 
                             <label for="per_page">Entries per Page:</label>
                             <select name="per_page" id="per_page" onchange="updateQueryString()">
@@ -188,33 +176,7 @@
                                     window.location.href = url.pathname + '?' + searchParams.toString();
                                 }
 
-
-                                // Show loading animation
-                                //  document.getElementById('loading-animation').style.display = 'block';
-
-                                // Simulate a delay of 2 seconds
-                                // setTimeout(function() {
-                                // Hide loading animation
-                                //    document.getElementById('loading-animation').style.display = 'none';
-
-                                // Show category table
-                                //    document.getElementById('category-table').style.display = 'table';
-                                //}, 2000);
-
-
-
-
-
-                                // Function to fetch data and update the table body
                                 function fetchDataAndPopulateTable() {
-                                    // Simulate a delay of 2 seconds
-                                    //// document.addEventListener('DOMContentLoaded', function() {
-                                    // const tableRow = document.getElementById('datatable').querySelector('tr');
-                                    // Display loading animation
-                                    //if (tableRow) {
-                                    //  tableRow.innerHTML = '<div id="loading-animation1" style="display: block; font-size: 50px; height: 100px; padding: 100px;"><i class="fas fa-spinner fa-spin"></i></div>';
-                                    // }
-                                    //});
 
                                     document.addEventListener('DOMContentLoaded', function() {
                                         const table = document.getElementById('datatable');
@@ -261,28 +223,6 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-        {{-- <script>
-            // public/js/categories.js
-
-            function updateData() {
-                const perPage = document.getElementById('per_page').value;
-
-                axios.get(`/admin/categories?per_page=${perPage}`)
-                    .then(response => {
-                        const tableBody = document.getElementById('datatable');
-                        tableBody.innerText = response.data;
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
-            }
-
-            // Initial data load when the page loads
-            document.addEventListener('DOMContentLoaded', updateData);
-
-        </script> --}}
-
 
         {{-- add modal --}}
         <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
