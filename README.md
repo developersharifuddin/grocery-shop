@@ -50,4 +50,4 @@ http://127.0.0.1:8000/admin/dashboard
 
 Demo PDF Link:
 grocery_shop.pdf;
-[Title](grocery_shop.pdf)
+[grocery_shop.pdf](grocery_shop.pdf)
