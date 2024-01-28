@@ -25,9 +25,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="float-right button">
-                <span class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal"> Add New</span>
                 <a href="{{ route('admin.brands.create') }}" class="btn btn-success">Add brands</a>
-
             </ol>
         </div>
     </div>

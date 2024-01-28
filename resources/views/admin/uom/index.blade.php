@@ -25,7 +25,6 @@
         </div>
         <div class="col-sm-6">
             <ol class="float-right button">
-                <span class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal"> Add New</span>
                 <a href="{{ route('admin.uoms.create') }}" class="btn btn-success">Add uoms</a>
 
             </ol>
@@ -80,10 +79,8 @@
                                             </p>
                                         </td>
                                         <td>
-                                            {{ $uom->status ? 'Active' : 'Inactive' }}
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="switchButton" checked>
-                                            </div>
+                                            {{ $uom->is_active ? 'Active' : 'Inactive' }}
+
                                         </td>
                                         <td>
                                             <a link="#" href="{{ route('admin.uoms.edit', $uom->id) }}"

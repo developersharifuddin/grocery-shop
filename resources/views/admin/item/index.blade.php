@@ -155,21 +155,7 @@
                                         </td>
 
                                         <td style="min-width:130px" class="d-flex my-4">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input mr-2" type="checkbox" id="switchButton"
-                                                    checked>
-                                            </div>
 
-                                            <a href="{{ route('admin.products.edit', $item->id) }}"
-                                                class="btn btn-primary btn-sm edit text-light border-0 edit" rel="tooltip"
-                                                id="edit" title="Edit" data-id="4">
-                                                <i class="fa-regular fa-pen-to-square"></i>
-                                            </a>
-                                            <a href="{{ route('admin.products.show', $item->id) }}"
-                                                class="btn btn-info btn-sm text-light view border-0 view" id="view"
-                                                rel="tooltip" title="view">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -305,8 +291,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="addModalLabel">Add New product</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body px-md-4">
                             <div class="row">

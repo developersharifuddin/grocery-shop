@@ -17,10 +17,8 @@
         </div>
         <div class="col-md-6">
             <ol class="float-right button">
-                {{-- <span class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal"> Add New</span> --}}
-                <a href="{{ route('admin.sales.create') }}" class="btn btn-success">POS Sales</a>
-                <a href="{{ route('admin.newsale') }}" class="btn btn-success">Add New sales</a>
-
+                  <a href="{{ route('admin.sales.create') }}" class="btn btn-success">POS Sales</a>
+                 
             </ol>
         </div>
     </div>

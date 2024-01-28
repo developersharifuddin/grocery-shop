@@ -208,22 +208,22 @@ class SellController extends Controller
 
 
             // Generate and print the invoice with additional payment and sell data
-            $invoiceData = [
-                'customerName' => $customer->name,
-                'mobile' => $customer->phone,
-                'seller' => Auth::user()->name,
-                'sellData' => [
-                    'invoiceNumber' => $sell->sale_code,
-                    'date' => $sell->created_at->format('d-m-Y H:i:s'),
-                    // Add more sell-related data as needed
-                ],
-                'paymentData' => [
-                    'totalPayableAmount' => $payment->total_payable_amount,
-                    'totalPaidAmount' => $payment->total_paid_amount,
-                    'totalDueAmount' => $payment->total_due_amount,
-                    // Add more payment-related data as needed
-                ],
-            ];
+            // $invoiceData = [
+            //     'customerName' => $customer->name,
+            //     'mobile' => $customer->phone,
+            //     'seller' => Auth::user()->name,
+            //     'sellData' => [
+            //         'invoiceNumber' => $sell->sale_code,
+            //         'date' => $sell->created_at->format('d-m-Y H:i:s'),
+            //         // Add more sell-related data as needed
+            //     ],
+            //     'paymentData' => [
+            //         'totalPayableAmount' => $payment->total_payable_amount,
+            //         'totalPaidAmount' => $payment->total_paid_amount,
+            //         'totalDueAmount' => $payment->total_due_amount,
+            //         // Add more payment-related data as needed
+            //     ],
+            // ];
 
             // $invoiceContent = view('invoice', $invoiceData)->render();
 
@@ -240,102 +240,39 @@ class SellController extends Controller
 
 
 
-            $invoiceContent = view('admin.pos.invoice', $invoiceData)->render();
+            // $invoiceContent = view('admin.pos.invoice', $invoiceData)->render();
 
-            // Attempt to print the invoice with retry mechanism
-            $retryAttempts = 3;
-            $retryDelayInSeconds = 2;
+            // // Attempt to print the invoice with retry mechanism
+            // $retryAttempts = 3;
+            // $retryDelayInSeconds = 2;
 
-            for ($attempt = 1; $attempt <= $retryAttempts; $attempt++) {
-                $printService = new PrintService();
-                $printingSuccessful = $printService->printInvoice($invoiceContent);
+            // for ($attempt = 1; $attempt <= $retryAttempts; $attempt++) {
+            //     $printService = new PrintService();
+            //     $printingSuccessful = $printService->printInvoice($invoiceContent);
 
-                if ($printingSuccessful) {
-                    // Invoice printed successfully
-                    break; // Exit the loop if printing was successful
-                } else {
-                    // Print attempt failed, wait before retrying
-                    sleep($retryDelayInSeconds);
-                }
-            }
-
-            if ($printingSuccessful) {
-                return redirect()->route('admin.sales.index')->with('success', 'Sell created successfully.');
-            } else {
-                // All retry attempts failed, handle accordingly
-                return back()->with('error', 'Error printing the invoice after multiple attempts.');
-            }
-
-            // All retry attempts failed, handle accordingly
-            return back()->with('error', 'Error printing the invoice after multiple attempts.');
-
-
-
-            // Create a bKash payment
-            // $user = Auth::user();
-            // $sell->createAsStripeCustomer(); // Creates a customer on Stripe (Laravel Cashier requirement)
-
-            // // Charge the user using Laravel Cashier
-            // $charge = $sell->charge($attribute['total_payable_amount'] * 100, [
-            //     'source' => $user->defaultPaymentMethod()->id,
-            //     'currency' => 'USD', // Change to your currency
-            //     'description' => 'Payment for sell ID: ' . $sell->id,
-            // ]);
-
-            // if ($charge->status === 'succeeded') {
-            //     // Payment successful, update payment status
-            //     $sell->payment_status = 1;
-
-            //     // Get bKash transaction ID from Laravel Cashier charge response
-            //     $bKashTransactionId = $charge->id;
-
-            //     // Additional information for bKash API call
-            //     $bkashPayload = [
-            //         'amount' => $attribute['total_payable_amount'],
-            //         'currency' => 'BDT', // Change to your currency
-            //         'intent' => 'sale',
-            //         'merchantInvoiceNumber' => 'INV-' . $sell->id,
-            //         'transactionReference' => 'TXN-' . $sell->id,
-            //         // Add other necessary fields based on bKash API documentation
-            //     ];
-
-            //     // Call bKash API to complete the transaction
-            //     $response = Http::withHeaders([
-            //         'Content-Type' => 'application/json',
-            //         'Authorization' => 'Bearer YOUR_BKASH_ACCESS_TOKEN', // Replace with your bKash access token
-            //     ])->post('https://api.bkash.com/tokenized/checkout/v1.0.0/payment/create', $bkashPayload);
-
-            //     // Check bKash API response and handle accordingly
-            //     if ($response->successful()) {
-            //         $bKashResponse = $response->json();
-            //         // Update your database with additional information from bKash response if needed
-            //         $sell->update([
-            //             'bkash_transaction_id' => $bKashResponse['paymentID'],
-            //         ]);
+            //     if ($printingSuccessful) {
+            //         // Invoice printed successfully
+            //         break; // Exit the loop if printing was successful
             //     } else {
-            //         // Handle the case when the bKash API call is not successful
-            //         throw new \Exception('bKash payment API call failed');
+            //         // Print attempt failed, wait before retrying
+            //         sleep($retryDelayInSeconds);
             //     }
-            // } else {
-            //     // Payment failed, handle accordingly
-            //     throw new \Exception('Payment failed');
             // }
 
+            // if ($printingSuccessful) {
+            //     return redirect()->route('admin.sales.index')->with('success', 'Sell created successfully.');
+            // } else {
+            //     // All retry attempts failed, handle accordingly
+            //     return back()->with('error', 'Error printing the invoice after multiple attempts.');
+            // }
 
+            // // All retry attempts failed, handle accordingly
+            // return back()->with('error', 'Error printing the invoice after multiple attempts.');
 
 
 
             DB::commit();
 
-            // return response()->json([
-            //     'success' => true,
-            //     'message' => 'Successfully sell Confirmed',
-            //     'data' => [
-            //         'sell' => $sell,
-            //         'sellDetails' => $sellDetails,
-            //         'payment' => $payment,
-            //     ],
-            // ], 200);
 
             return redirect()->route('admin.sales.index');
         } catch (\Exception $error) {

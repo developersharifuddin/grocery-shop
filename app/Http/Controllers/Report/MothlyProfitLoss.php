@@ -57,11 +57,20 @@ class MothlyProfitLoss extends Controller
             $purchaseOrders = PurchaseOrders::whereBetween('created_at', [$to_date, $from_date])
                 ->where('is_received', 1)->sum('total_purchase_amount');
             $sales = Sell::whereBetween('created_at', [$to_date, $from_date])->where('sells_status', 1)->sum('payable');
+
+            // $sales = Sell::whereBetween('created_at', [$to_date, $from_date])
+            // ->where('sells_status', 1)
+            // ->leftJoin('items', 'sells.item_id', '=', 'items.id') // Assuming 'id' is the primary key in the 'items' table
+            // ->sum('sells.sell_price') - Item::whereBetween('items.created_at', [$to_date, $from_date])
+            // ->where('items.sells_status', 1)
+            // ->sum('items.purchase_price');
+
+
             $expenses = DailyExpenses::whereBetween('created_at', [$to_date, $from_date])->where('approved_status', "Approved")->sum('amount');
 
             // Calculate profit and loss
             $totalIncome = $sales;
-            $totalExpense = $purchaseOrders + $expenses;
+            $totalExpense =  $expenses;
             $netProfitLoss = $totalIncome - $totalExpense;
 
             // Return or display the report
@@ -74,6 +83,7 @@ class MothlyProfitLoss extends Controller
                 'Allsales' => $Allsales,
                 'from_date' => $from_date,
                 'to_date' => $to_date,
+                'purchaseOrders' => $purchaseOrders,
             ]));
         } catch (\Exception $e) {
             // Log or handle the exception
@@ -118,9 +128,8 @@ class MothlyProfitLoss extends Controller
 
         // Calculate profit and loss
         $totalIncome = $sales;
-        $totalExpense = $purchaseOrders + $expenses;
+        $totalExpense =  $expenses;
         $netProfitLoss = $totalIncome - $totalExpense;
-
         // dd($transaction);
 
         $filename =  $to_date . $from_date . '.pdf';
@@ -133,6 +142,7 @@ class MothlyProfitLoss extends Controller
             'Allsales' => $Allsales,
             'from_date' => $from_date,
             'to_date' => $to_date,
+            'purchaseOrders' => $purchaseOrders,
         ], [], [
             'mode' => '',
             'format' => 'A4-P',

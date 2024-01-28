@@ -24,11 +24,9 @@
             </ol>
         </div>
         <div class="col-sm-6">
-            <ol class="float-right button">
-                <span class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal"> Add New</span>
-                <a href="{{ route('admin.sizes.create') }}" class="btn btn-success">Add sizes</a>
-
-            </ol>
+            {{-- <ol class="float-right button">
+                <a href="{{ route('admin.sizes.create') }}" class="btn btn-success">Add sizes</a> 
+            </ol> --}}
         </div>
     </div>
 
@@ -79,9 +77,9 @@
                                         </td>
                                         <td>
                                             {{ $size->status ? 'Active' : 'Inactive' }}
-                                            <div class="form-check form-switch">
+                                            {{-- <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" id="switchButton" checked>
-                                            </div>
+                                            </div> --}}
                                         </td>
                                         <td>
                                             <a link="#" href="{{ route('admin.sizes.edit', $size->id) }}"
@@ -194,8 +192,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="addModalLabel">Add New size</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body px-md-4">
                             <div class="row">

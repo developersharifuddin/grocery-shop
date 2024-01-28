@@ -144,24 +144,25 @@ class PurchaseOrdersController extends Controller
                 }
             }
 
-            DailyExpenses::create([
-                'expense_name' => "Purchase Order & Payment to supplier. SPO Id=" . $purchaseOrder->id,
-                'expense_group' => "Purchase Order",
-                'company' => 'Rabbi Grocery Shop',
-                'store' => 'Main Store',
-                'expense_date' => now(),
-                'approved_status' => 'Approved',
-                'amount' => $request->input('total_purchase_qty'),
-            ]);
+            // DailyExpenses::create([
+            //     'expense_name' => "Purchase Order & Payment to supplier. SPO Id=" . $purchaseOrder->id,
+            //     'expense_group' => "Purchase Order",
+            //     'company' => 'Rabbi Grocery Shop',
+            //     'store' => 'Main Store',
+            //     'expense_date' => now(),
+            //     'approved_status' => 'Approved',
+            //     'amount' => $request->input('total_purchase_qty'),
+            // ]);
 
 
             PaymentToSupplier::create([
                 'supplier_id' => $purchaseOrder->supplier_id,
                 'spo_id' => $purchaseOrder->id,
                 'payable_amount' => $purchaseOrder->total_purchase_amount,
-                'due_amout' => 0,
+                'due_amount' => 0,
                 'paid_amount' =>  $purchaseOrder->total_purchase_amount,
                 'is_closed' =>  $purchaseOrder->is_closed,
+                '$itemInfo' =>  $$itemInfo,
             ]);
 
             DB::commit();
